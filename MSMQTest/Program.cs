@@ -23,5 +23,10 @@ namespace MSMQTest
             public string DueDate;
         }
 
+        public struct MessageData
+        {
+            public string Message, Queue;
+            public int testNum;
+        }
     }
 }

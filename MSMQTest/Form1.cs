@@ -14,22 +14,25 @@ namespace MSMQTest
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btnSend_Click(object sender, EventArgs e)
         {
 
-            Payment myPayment;
+            MessageData msgData;
 
-            myPayment.Payor = textBox1.Text;
-            myPayment.Payee = textBox2.Text;
-            int i = Convert.ToInt32(textBox3.Text);
-            myPayment.Amount = i;
-            myPayment.DueDate = textBox4.Text;
+            if (txtQueue.Text.Length < 1)
+            {
+                txtQueue.Text = ".\\private$\\testqueue";
+            }
+
+            msgData.Message = txtMessage.Text;
+            msgData.Queue = txtQueue.Text;
+            msgData.testNum = 1;
 
             System.Messaging.Message msg = new System.Messaging.Message();
-            msg.Body = myPayment;
+            msg.Body = msgData;
 
-            MessageQueue msgQ = new MessageQueue(".\\private$\\testqueue");
-            msgQ.Send(textBox1.Text);
+            MessageQueue msgQ = new MessageQueue(txtQueue.Text);
+            msgQ.Send(txtMessage.Text);
 
         }
 
